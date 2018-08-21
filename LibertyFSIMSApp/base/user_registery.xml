@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<server description="This user registery file">
+ 
+
+	<ldapRegistry id="LdapRegistryTestRealm" realm="LdapRegistryTestRealm" 
+		host="10.200.19.168" port="389" ignoreCase="true" 
+		baseDN="dc=gov,dc=on,dc=ca" 
+		bindDN="cn=manager"
+		bindPassword="good4now"
+		ldapType="Custom"
+		sslEnabled="false">
+		<customFilters
+			userFilter="(&amp;(uid=%v)(objectclass=inetOrgPerson))" 
+			groupFilter="(&amp;(cn=%v)(|(objectclass=groupOfNames)
+						 (objectclass=groupOfUniqueNames)(objectclass=groupOfURLs)))"
+			userIdMap="*:uid" 
+			groupIdMap="*:cn" 
+			groupMemberIdMap="groupOfUniqueNames:uniqueMember">
+		</customFilters>    
+    </ldapRegistry>
+	
+	<basicRegistry id="BasicRegistry">     
+        <user name="wasadmin" password="{xor}KD4sPjsyNjE=" /> 
+        <group name="admin"> 
+			<member name="wasadmin" /> 
+        </group> 
+        
+     </basicRegistry> 
+         
+	 <administrator-role> 
+		  <user>wasadmin</user> 
+	</administrator-role> 
+
+	 
+ </server>
+ 
+ 
+   
+		  

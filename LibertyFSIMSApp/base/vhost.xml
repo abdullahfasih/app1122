@@ -1,0 +1,11 @@
+<server description="FSIMS vhost">
+
+    <!-- The virtual host entry includes the ports for all servers so the merge tools creates a single cluster-->
+    <virtualHost id="default_host" allowFromEndpointRef="defaultHttpEndpoint">
+          <hostAlias>ON34C02545883.cihs.ad.gov.on.ca:9080</hostAlias>
+          <hostAlias>ON34C02545883.cihs.ad.gov.on.ca:9443</hostAlias>
+          <hostAlias>192.168.99.100:9080</hostAlias>
+          <hostAlias>192.168.99.100:9443</hostAlias>
+   </virtualHost>
+   
+ </server>

@@ -1,0 +1,60 @@
+<configuration scan="false"><!-- If set to true, by default, the configuration file will be scanned for changes once every minute. -->
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        	<level>DEBUG</level>
+    	</filter>
+	    <filter class="govonca.lrc.moe.sharedcomponent.logger.filter.PackageThresholdFilter">
+			<path>org.hibernate</path>
+			<level>ERROR</level>
+	    </filter>
+		<encoder>
+			<pattern>%-30(%d{yyyy-MM-dd} %d{HH:mm:ss.SSS} [%thread]) %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- File name is provided dynamically Need to comment this for Windows issue for file-open/close
+		<file>./logs/${FILE_NAME}.log</file>
+		-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./logs/${FILE_NAME}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>5MB</maxFileSize><!-- roll it whenever the file size reaches 5MB -->
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>10</maxHistory><!-- keep 10 days' worth of history -->
+		</rollingPolicy>
+		
+		<!-- Default Log Level Threshold -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        	<level>DEBUG</level>
+    	</filter>
+	    <filter class="govonca.lrc.moe.sharedcomponent.logger.filter.PackageThresholdFilter">
+			<path>org.hibernate</path>
+			<level>ERROR</level>
+	    </filter>
+	    <!-- Only when it needs to dig into the queries run with actual values if available. -->
+	    <!--filter class="govonca.lrc.moe.sharedcomponent.logger.filter.PackageThresholdFilter">
+			<path>org.hibernate.type</path>
+			<level>TRACE</level>
+	    </filter-->
+		<encoder>
+			<pattern>%-30(%d{yyyy-MM-dd} %d{HH:mm:ss.SSS} [%thread]) %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Way with less granularity -->
+<!-- 	
+	<logger name="org.hibernate" level="ERROR" />
+	<logger name="org.hibernate.type" level="TRACE" />
+ -->	
+	<logger name="govonca.lrc.approvals" level="DEBUG" />
+	<logger name="govonca.lrc.moe" level="DEBUG" />
+	<logger name="org.hibernate" level="ERROR" />
+	
+	<root>
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+</configuration>

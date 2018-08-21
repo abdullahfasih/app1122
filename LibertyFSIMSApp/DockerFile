@@ -1,0 +1,20 @@
+# Use 
+FROM websphere-liberty
+
+# Set the working directory
+WORKDIR /opt/ibm/wlp/usr/
+
+# Copy the directory contents into the container 
+COPY base/* servers/defaultServer/
+COPY FSIMS/ servers/defaultServer/apps/FSIMS/
+COPY shared/jdbc/ shared/resources/jdbc/
+
+# Make ports 9080 9043 available to the world outside this container
+EXPOSE 9080 9443 
+
+# Define environment variable
+ENV NAME LibertyDocker
+
+# Run 
+RUN apt-get update && apt-get install nano
+

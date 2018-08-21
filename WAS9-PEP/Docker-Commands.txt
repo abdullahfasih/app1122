@@ -1,0 +1,24 @@
+docker build . --tag was9-latest-pep:1.0
+
+docker run --name WAS9-latest-PEP --hostname="WAS9-latest-PEP" -p 9043:9043 -p 9443:9443 -p 9080:9080 -d  was9-latest-pep:1.1
+docker stop --time=60 WAS9-latest-PEP
+docker start WAS9-latest-PEP
+docker exec WAS9-latest-PEP cat /tmp/PASSWORD
+-->vROWyB5F --> wsadmin:vROWyB5F
+
+Oracle JDBC XA DatSource 
+URL: jdbc:oracle:thin:@lrcdipdcdbora01.cihs.gov.on.ca:1521:D075
+ORACLE_JDBC_DRIVER_PATH->D:\webapps\moe\oraclejars
+
+docker exec -it WAS9-latest-PEP bash
+docker cp ojdbc6.jar WAS9-latest-PEP:/opt/IBM/WebSphere/AppServer/oracle 
+
+docker commit f315cb1a4ed2  was9-latest-pep:1.1
+docker commit f315cb1a4ed2  was9-latest-pep:1.2
+docker pull ronaldsantiago/was9-latest-pep
+
+
+Abdullah Fasih
+
+
+jaxws.ignore.extraWSDLOps

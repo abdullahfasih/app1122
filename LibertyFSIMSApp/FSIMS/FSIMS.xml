@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="FSIMS Application Configuration File">
+    <library id="configResources-FSIMS">
+		<folder dir="${server.config.dir}/apps/FSIMS/properties"/>
+	</library>
+
+    <library id="fsimsOracleLib">
+        <fileset dir="${shared.resource.dir}/jdbc" includes="ojdbc7.jar"></fileset>
+    </library>
+	
+    <dataSource id="fsimsDataSource" jndiName="jdbc/fsimsDataSource" type="javax.sql.ConnectionPoolDataSource">
+	    <jdbcDriver libraryRef="fsimsOracleLib"/>
+		<properties.oracle URL="jdbc:oracle:thin:@lrcdptvsdbor005-zone.hpov.cihs.gov.on.ca:2318:acets" password="fsimswebuseracets" user="FSIMSWEBUSER"/>
+    </dataSource>
+	
+    <enterpriseApplication location="${server.config.dir}/apps/FSIMS/FSIMS.ear" id="FSIMS">
+    	<classloader privateLibraryRef="configResources-FSIMS"/>
+    </enterpriseApplication>
+	
+	<webApplication id="UserManagementWeb" location="${server.config.dir}/apps/FSIMS/UserManagementWeb.war" name="UserManagementWeb">
+		<classloader privateLibraryRef="configResources-FSIMS"/>
+		<application-bnd>
+    		<security-role name="Authenticated">
+                <group name="FSIMSUser"/>
+            </security-role>
+			<security-role name="Everyone">
+                <special-subject type="EVERYONE"/>
+            </security-role>
+        </application-bnd>
+	</webApplication>
+</server>

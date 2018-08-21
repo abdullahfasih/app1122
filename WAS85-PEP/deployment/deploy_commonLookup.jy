@@ -1,0 +1,3 @@
+AdminApp.install('/opt/IBM/EAR/MOFA_Service_CommonLookup.ear',['-appname','MOFA_Service_CommonLookup','-installed.ear.destination','/opt/IBM/installedApps']) 
+AdminConfig.save()
+
